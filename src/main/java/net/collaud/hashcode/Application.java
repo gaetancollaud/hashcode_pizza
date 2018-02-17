@@ -12,20 +12,11 @@ public class Application {
 
 	public static void main(String[] args) {
 		
-		new Thread(new ZipSources("data/outputs/hashcode-2016.zip")
-				.addFolder("src")
-				.addFile("README.md")
-				.addFile("pom.xml")
-				.addFile("LICENSE")
-				.addFile(".gitignore")
-				.getRunnable())
-				.start();
-		
 		List<String> files = Arrays.asList(
-				"example",
-				"small",
-				"medium",
-				"big"
+				"1_example",
+				"2_small",
+				"3_medium",
+				"4_big"
 				);
 		
 		files.parallelStream().forEach(f -> {
@@ -33,6 +24,16 @@ public class Application {
 			String out = "data/outputs/"+f+".out";
 			new HashCodePizza(in, out).solve();
 		});
+
+
+		new Thread(new ZipSources("data/outputs/0_hashcode.zip")
+				.addFolder("src")
+				.addFile("README.md")
+				.addFile("pom.xml")
+				.addFile("LICENSE")
+				.addFile(".gitignore")
+				.getRunnable())
+				.start();
 		
 	}
 	
